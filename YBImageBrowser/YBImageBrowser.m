@@ -175,11 +175,13 @@
     id<YBIBDataProtocol> data = [self.dataMediator dataForCellAtIndex:self.currentPage];
     if ([data respondsToSelector:@selector(yb_projectiveView)]) {
         startView = data.yb_projectiveView;
-        self.hiddenProjectiveView = startView;
-        if ([startView isKindOfClass:UIImageView.class]) {
-            startImage = ((UIImageView *)startView).image;
-        } else {
-            startImage = YBIBSnapshotView(startView);
+        if(startView) {
+            self.hiddenProjectiveView = startView;
+            if ([startView isKindOfClass:UIImageView.class]) {
+                startImage = ((UIImageView *)startView).image;
+            } else {
+                startImage = YBIBSnapshotView(startView);
+            }
         }
     }
     if ([data respondsToSelector:@selector(yb_imageViewFrameWithContainerSize:imageSize:orientation:)]) {
